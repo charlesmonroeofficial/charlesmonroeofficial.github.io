@@ -228,6 +228,13 @@ var girl = {
     "[[b;#fff;]space]" : "C'mon, Michael! It's game time!"
 }
 
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    delete girl["[[b;#fff;]mirror]"];
+    delete girl["[[b;#fff;]pause]"];
+    delete girl["[[b;#fff;]play]"];
+    delete girl["[[b;#fff;]snap]"];
+}
+
 function logo() {
     term.echo($('<img width="350" src="./index_files/logo.png">'));
 }
