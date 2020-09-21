@@ -95,34 +95,41 @@ var acceptStream = (function () {
 function mirror() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         term.pause();
-        var media = navigator.mediaDevices.getUserMedia(constraints);
-        // TODO: this will create memory leaks when resize Object url will not be revoked
-        media.then(function (mediaStream) {
+        setTimeout(function () {
             term.resume();
-            var stream;
-            if (!acceptStream) {
-                stream = window.URL.createObjectURL(mediaStream);
-            } else {
-                stream = mediaStream;
-            }
-            term.echo('<video data-play="true" class="self"></video>', {
-                raw: true,
-                finalize: function (div) {
-                    var video = div.find('video');
-                    if (!video.length) {
-                        return;
-                    }
-                    if (acceptStream) {
-                        video[0].srcObject = stream;
-                    } else {
-                        video[0].src = stream;
-                    }
-                    if (video.data('play')) {
-                        video[0].play();
-                    }
+        }, 5000);
+        try {
+            var media = navigator.mediaDevices.getUserMedia(constraints);
+            // TODO: this will create memory leaks when resize Object url will not be revoked
+            media.then(function (mediaStream) {
+                term.resume();
+                var stream;
+                if (!acceptStream) {
+                    stream = window.URL.createObjectURL(mediaStream);
+                } else {
+                    stream = mediaStream;
                 }
+                term.echo('<video data-play="true" class="self"></video>', {
+                    raw: true,
+                    finalize: function (div) {
+                        var video = div.find('video');
+                        if (!video.length) {
+                            return;
+                        }
+                        if (acceptStream) {
+                            video[0].srcObject = stream;
+                        } else {
+                            video[0].src = stream;
+                        }
+                        if (video.data('play')) {
+                            video[0].play();
+                        }
+                    }
+                });
             });
-        });
+        } catch (e) {
+            term.resume();
+        }
     }
 }
 var play = function () {
@@ -140,6 +147,9 @@ function pause() {
 function snap() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         term.pause();
+        setTimeout(function () {
+            term.resume();
+        }, 5000);
         var media = navigator.mediaDevices.getUserMedia(constraints);
         media.then(function (mediaStream) {
             const mediaStreamTrack = mediaStream.getVideoTracks()[0];
