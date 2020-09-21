@@ -235,6 +235,10 @@ function logo() {
     term.echo($('<img width="350" src="./index_files/logo.png">'));
 }
 
+function hint() {
+    term.echo("[[b;#fff;]girl]");
+}
+
 function delorean(delay) {
     term.pause();
 
