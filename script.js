@@ -201,7 +201,7 @@ var menu = {
     "[[b;#fff;]about]": "Who am I?",
     "[[b;#fff;]links]": "Where am I?",
     "[[b;#fff;]contact]": "Hello World",
-    "my innocent ____": "Easter Eggs",
+    "my innocent ____": "You might need a [[b;#fff;]hint] for this one",
 }
 
 var about = {
