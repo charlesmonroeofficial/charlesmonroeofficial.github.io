@@ -220,7 +220,8 @@ var girl = {
     "[[b;#fff;]play]": "Un-Freeze",
     "[[b;#fff;]snap]": "Selfie?",
     "[[b;#fff;]delorean]": "Time Travel",
-    "[[b;#fff;]space]": "C'mon, Michael! It's game time!"
+    "[[b;#fff;]space]": "C'mon, Michael! It's game time!",
+    "javascript": "I can speak fluently. Try me!"
 }
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
